@@ -1,6 +1,6 @@
-import { FaHome, FaShoppingCart, FaUsers, FaPlus } from "react-icons/fa";
+import { FaBox, FaHome, FaShoppingCart, FaUsers, FaPlus } from "react-icons/fa";
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Sidebar() {
 
@@ -60,6 +60,19 @@ export default function Sidebar() {
                         <FaUsers />
                         Customers
                     </NavLink  >
+
+                    <NavLink
+                        to="/products"
+                        onClick={() => setActive("products")}
+                        className={`flex items-center gap-3 cursor-pointer ${active === "products"
+                                ? "text-green-500 font-bold"
+                                : "text-gray-500"
+                            }`}
+                    >
+                        <FaBox />
+                        Produk
+                    </NavLink>
+
                     <NavLink to="/error400" className="flex gap-3 text-gray-500">
                         ⚠️ Error 400
                     </NavLink>

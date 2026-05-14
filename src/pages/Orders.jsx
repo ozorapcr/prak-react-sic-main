@@ -4,7 +4,7 @@ import PageHeader from "../pertemuan-5/components/PageHeader";
 import data from "../data/orders.json";
 
 export default function Orders() {
-  const [orders, setOrders] = useState(data);
+  const [orders] = useState(data);
   const [showForm, setShowForm] = useState(false);
   return (
     <div>

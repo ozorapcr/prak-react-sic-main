@@ -4,7 +4,7 @@ import PageHeader from "../pertemuan-5/components/PageHeader";
 import data from "../data/customers.json";
 
 export default function Customers() {
-  const [customers, setCustomers] = useState(data);
+  const [customers] = useState(data);
   const [showForm, setShowForm] = useState(false);
 
   return (
