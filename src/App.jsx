@@ -10,6 +10,7 @@ const MainLayout = React.lazy(() => import("./layouts/MainLayout"));
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
 const Orders = React.lazy(() => import("./pages/Orders"));
 const Customers = React.lazy(() => import("./pages/Customers"));
+const CustomerDetail = React.lazy(() => import("./pages/CustomerDetail"));
 const Produk = React.lazy(() => import("./pages/Produk"));
 const ProductDetail = React.lazy(() => import("./pages/ProductDetail"));
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/customers" element={<Customers />} />
+        <Route path="/customers/:id" element={<CustomerDetail />} />
         <Route path="/products" element={<Produk />} />
         <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/error400" element={<Error400 />} />

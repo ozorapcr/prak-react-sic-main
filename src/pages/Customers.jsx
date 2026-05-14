@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { FaBan, FaDollarSign, FaShoppingCart, FaTruck } from "react-icons/fa";
 import PageHeader from "../pertemuan-5/components/PageHeader";
 import data from "../data/customers.json";
@@ -44,7 +45,14 @@ export default function Customers() {
           {customers.map((item) => (
             <tr key={item.customerId}>
               <td>{item.customerId}</td>
-              <td>{item.customerName}</td>
+              <td>
+                <Link
+                  to={`/customers/${item.customerId}`}
+                  className="font-semibold text-emerald-500 hover:text-emerald-600"
+                >
+                  {item.customerName}
+                </Link>
+              </td>
               <td>{item.email}</td>
               <td>{item.phone}</td>
               <td>{item.loyalty}</td>
