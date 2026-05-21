@@ -1,12 +1,9 @@
 import { FaBox, FaHome, FaShoppingCart, FaUsers, FaPlus } from "react-icons/fa";
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
+const navClass = ({ isActive }) => `block py-2 px-3 rounded-md transition-colors ${isActive ? "text-green-500 font-bold bg-green-50" : "text-gray-500 hover:bg-gray-100"}`;
+
 export default function Sidebar() {
-
-    // 🔥 IMPROVISASI 3 - ACTIVE MENU STATE
-    const [active, setActive] = useState("dashboard");
-
     return (
         <div className="w-64 bg-white p-6 flex flex-col justify-between min-h-screen border-r">
 
@@ -21,70 +18,51 @@ export default function Sidebar() {
                 </p>
 
                 <ul className="space-y-4">
-
-                    {/* DASHBOARD */}
-                    <NavLink
-                        to="/"
-                        onClick={() => setActive("dashboard")}
-                        className={`flex items-center gap-3 cursor-pointer ${active === "dashboard"
-                                ? "text-green-500 font-bold"
-                                : "text-gray-500"
-                            }`}
-                    >
-                        <FaHome />
-                        Dashboard
-                    </NavLink>
-
-                    {/* ORDERS */}
-                    <NavLink
-                        to="/orders"
-                        onClick={() => setActive("orders")}
-                        className={`flex items-center gap-3 cursor-pointer ${active === "orders"
-                                ? "text-green-500 font-bold"
-                                : "text-gray-500"
-                            }`}
-                    >
-                        <FaShoppingCart />
-                        Orders
-                    </NavLink  >
-
-                    {/* CUSTOMERS */}
-                    <NavLink
-                        to="/customers"
-                        onClick={() => setActive("customers")}
-                        className={`flex items-center gap-3 cursor-pointer ${active === "customers"
-                                ? "text-green-500 font-bold"
-                                : "text-gray-500"
-                            }`}
-                    >
-                        <FaUsers />
-                        Customers
-                    </NavLink  >
-
-                    <NavLink
-                        to="/products"
-                        onClick={() => setActive("products")}
-                        className={`flex items-center gap-3 cursor-pointer ${active === "products"
-                                ? "text-green-500 font-bold"
-                                : "text-gray-500"
-                            }`}
-                    >
-                        <FaBox />
-                        Produk
-                    </NavLink>
-
-                    <NavLink to="/error400" className="flex gap-3 text-gray-500">
-                        ⚠️ Error 400
-                    </NavLink>
-
-                    <NavLink to="/error401" className="flex gap-3 text-gray-500">
-                        🔐 Error 401
-                    </NavLink>
-
-                    <NavLink to="/error403" className="flex gap-3 text-gray-500">
-                        🚫 Error 403
-                    </NavLink>
-
+                    <li>
+                        <NavLink to="/" end className={navClass}>
+                            <FaHome />
+                            Dashboard
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/orders" className={navClass}>
+                            <FaShoppingCart />
+                            Orders
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/customers" className={navClass}>
+                            <FaUsers />
+                            Customers
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/products" className={navClass}>
+                            <FaBox />
+                            Produk
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/components" className={navClass}>
+                            <FaBox />
+                            Components
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/error400" className={navClass}>
+                            ⚠️ Error 400
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/error401" className={navClass}>
+                            🔐 Error 401
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/error403" className={navClass}>
+                            🚫 Error 403
+                        </NavLink>
+                    </li>
                 </ul>
             </div>
 

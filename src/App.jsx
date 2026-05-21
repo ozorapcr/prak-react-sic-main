@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Loading from "./components/Loading";
 import AuthLayout from "./layouts/AuthLayout";
 import Login from "./pages/auth/Login";
-
+import Components from "./pages/Components";
 
 const MainLayout = React.lazy(() => import("./layouts/MainLayout"));
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
@@ -25,20 +25,21 @@ function App() {
     <Suspense fallback={<Loading />}>
       <Routes>
         <Route element={<MainLayout />}>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/orders" element={<Orders />} />
-        <Route path="/customers" element={<Customers />} />
-        <Route path="/customers/:id" element={<CustomerDetail />} />
-        <Route path="/products" element={<Produk />} />
-        <Route path="/products/:id" element={<ProductDetail />} />
-        <Route path="/error400" element={<Error400 />} />
-        <Route path="/error401" element={<Error401 />} />
-        <Route path="/error403" element={<Error403 />} />
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/customers" element={<Customers />} />
+          <Route path="/customers/:id" element={<CustomerDetail />} />
+          <Route path="/products" element={<Produk />} />
+          <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/components" element={<Components />} />
+          <Route path="/error400" element={<Error400 />} />
+          <Route path="/error401" element={<Error401 />} />
+          <Route path="/error403" element={<Error403 />} />
         </Route>
-        <Route element={<AuthLayout/>}>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register/>} />
-            <Route path="/forgot" element={<Forgot/>} />
+        <Route element={<AuthLayout />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forgot" element={<Forgot />} />
         </Route>
       </Routes>
     </Suspense>
