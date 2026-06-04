@@ -5,6 +5,7 @@ import Loading from "./components/Loading";
 import AuthLayout from "./layouts/AuthLayout";
 import Login from "./pages/auth/Login";
 import Components from "./pages/Components";
+import FiturXYZ from "./pages/FiturXYZ";
 
 const MainLayout = React.lazy(() => import("./layouts/MainLayout"));
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
@@ -32,6 +33,7 @@ function App() {
           <Route path="/products" element={<Produk />} />
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/components" element={<Components />} />
+          <Route path="/fitur-xyz" element={<FiturXYZ />} />
           <Route path="/error400" element={<Error400 />} />
           <Route path="/error401" element={<Error401 />} />
           <Route path="/error403" element={<Error403 />} />

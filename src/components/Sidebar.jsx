@@ -48,9 +48,11 @@ export default function Sidebar() {
                             Components
                         </NavLink>
                     </li>
+
                     <li>
-                        <NavLink to="/error400" className={navClass}>
-                            ⚠️ Error 400
+                        <NavLink to="/fitur-xyz" className={navClass}>
+                            <FaBox />
+                            Fitur XYZ
                         </NavLink>
                     </li>
                     <li>
