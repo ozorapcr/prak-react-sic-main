@@ -1,71 +1,69 @@
-import { createContext, useContext, useEffect, useState } from 'react'
-import { supabase } from '../lib/supabase'
+import { createContext, useContext, useEffect, useState } from 'react';
+import { supabase } from '../lib/supabase';
 
-const AuthContext = createContext()
+const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null)
-  const [profile, setProfile] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState(null);
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Cek session saat load
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null)
+      setUser(session?.user ?? null);
       if (session?.user) {
-        fetchProfile(session.user.id)
+        fetchProfile(session.user.id);
       }
-      setLoading(false)
-    })
+      setLoading(false);
+    });
 
-    // Listen perubahan auth
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null)
-      if (session?.user) {
-        fetchProfile(session.user.id)
-      } else {
-        setProfile(null)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUser(session?.user ?? null);
+        if (session?.user) {
+          fetchProfile(session.user.id);
+        } else {
+          setProfile(null);
+        }
+        setLoading(false);
       }
-      setLoading(false)
-    })
+    );
 
-    return () => subscription.unsubscribe()
-  }, [])
+    return () => subscription.unsubscribe();
+  }, []);
 
   const fetchProfile = async (userId) => {
     const { data, error } = await supabase
       .from('member_profiles')
       .select('*')
       .eq('user_id', userId)
-      .single()
+      .single();
     
     if (!error && data) {
-      setProfile(data)
+      setProfile(data);
     }
-  }
+  };
 
   const login = async (email, password) => {
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password
-    })
-    if (error) throw error
-    return data
-  }
+    });
+    if (error) throw error;
+    return data;
+  };
 
   const register = async (email, password, name, phone = '') => {
-    // 1. Register user
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
         data: { name, role: 'member' }
       }
-    })
-    if (error) throw error
+    });
+    if (error) throw error;
 
     if (data.user) {
-      // 2. Buat customer
       const { data: customer, error: customerError } = await supabase
         .from('customers')
         .insert({
@@ -75,11 +73,10 @@ export function AuthProvider({ children }) {
           loyalty: 'Bronze'
         })
         .select()
-        .single()
+        .single();
 
-      if (customerError) throw customerError
+      if (customerError) throw customerError;
 
-      // 3. Buat member_profiles
       const { error: profileError } = await supabase
         .from('member_profiles')
         .insert({
@@ -88,18 +85,18 @@ export function AuthProvider({ children }) {
           total_points: 0,
           tier: 'bronze',
           tier_discount: 0
-        })
+        });
 
-      if (profileError) throw profileError
+      if (profileError) throw profileError;
     }
-    return data
-  }
+    return data;
+  };
 
   const logout = async () => {
-    await supabase.auth.signOut()
-    setUser(null)
-    setProfile(null)
-  }
+    await supabase.auth.signOut();
+    setUser(null);
+    setProfile(null);
+  };
 
   const value = {
     user,
@@ -109,15 +106,15 @@ export function AuthProvider({ children }) {
     logout,
     loading,
     fetchProfile
-  }
+  };
 
   return (
     <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
-  )
+  );
 }
 
 export function useAuth() {
-  return useContext(AuthContext)
+  return useContext(AuthContext);
 }
